@@ -79,11 +79,8 @@ const Navbar = () => {
 
       <div className="flex gap-6 items-center">
         <div className="relative" ref={cartRef}>
-          <div>
-            <AiOutlineShoppingCart
-              className="text-2xl cursor-pointer"
-              onClick={handleCart}
-            />
+          <div onClick={handleCart} className="cursor-pointer">
+            <AiOutlineShoppingCart className="text-2xl" />
 
             {cart?.length > 0 && (
               <div className="absolute -top-2 -right-2 bg-red-600 rounded-full w-5 h-5 flex justify-center items-center text-white text-xs">
