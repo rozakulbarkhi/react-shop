@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getProduct } from "../store/actions/product";
 import { addToCart, totalPrice } from "../store/features/cart/cartSlice";
+import CardDetailSkeleton from "../components/CardDetailSkeleton";
 
 const DetailProduct = () => {
   const { id } = useParams();
@@ -15,11 +16,6 @@ const DetailProduct = () => {
   useEffect(() => {
     dispatch(getProduct(id));
   }, [dispatch, id]);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
-
-  if (!product) return <NotFound />;
 
   const handleAddToCart = () => {
     dispatch(addToCart({ ...product, quantity }));
@@ -36,6 +32,11 @@ const DetailProduct = () => {
       setquantity((prev) => prev - 1);
     }
   };
+
+  if (loading) return <CardDetailSkeleton />;
+  if (error) return <p>Error: {error}</p>;
+
+  if (!product) return <NotFound />;
 
   return (
     <div className="flex mx-auto h-[50vh] w-[50vw] bg-white border border-slate-200 rounded-xl shadow-lg">
