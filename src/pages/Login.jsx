@@ -1,14 +1,25 @@
-import axios from "axios";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { login } from "../store/actions/auth";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const [data, setData] = useState({
     username: "",
     password: "",
   });
-
+  const token = Cookies.get("token");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, [token, navigate]);
+
+  const { loading } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,36 +33,18 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await axios(
-        `${import.meta.env.VITE_APP_BASE_URL}/auth/login`,
-        {
-          method: "POST",
-          data,
-        }
-      );
+    dispatch(login(data));
 
-      console.log(response.data);
-
-      setData({
-        username: "",
-        password: "",
-      });
-
-      navigate("/");
-    } catch (error) {
-      console.log(error.message);
-      setData({
-        username: "",
-        password: "",
-      });
-    }
+    setData({
+      username: "",
+      password: "",
+    });
   };
 
   return (
     <div className="min-h-screen border flex bg-slate-100 overflow-hidden">
       <div className="flex-1 flex justify-center items-center w-full">
-        <div className="flex flex-col space-y-6 bg-white p-20 rounded-lg shadow-md">
+        <div className="flex flex-col space-y-6 bg-white px-20 py-12 rounded-lg shadow-md">
           <div className="tracking-wider">
             <h1 className="text-blue-800 font-bold text-3xl">Login</h1>
             <p className="font-medium text-sm">
@@ -69,6 +62,7 @@ const Login = () => {
                 id="username"
                 value={data.username}
                 onChange={handleChange}
+                autoFocus
                 placeholder="tlacobtla"
                 className="px-2 py-1 rounded-md outline outline-slate-200 placeholder:text-xs"
               />
@@ -92,10 +86,20 @@ const Login = () => {
                 disabled={data.username === "" || data.password === ""}
                 className="bg-blue-800 hover:bg-blue-900 px-2 py-1 capitalize rounded-md w-full text-white my-1 disabled:bg-slate-400 disabled:cursor-not-allowed"
               >
-                submit
+                {loading ? "Loading..." : "Login"}
               </button>
             </div>
           </form>
+
+          <div className="text-center text-sm text-blue-600 hover:text-blue-800 underline">
+            <Link
+              to="https://fakestoreapi.com/users"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Check credentials
+            </Link>
+          </div>
         </div>
       </div>
       <div className="flex-1 flex justify-center items-center">
