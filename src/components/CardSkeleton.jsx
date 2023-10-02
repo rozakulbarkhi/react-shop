@@ -1,7 +1,7 @@
 const CardSkeleton = () => {
   return (
-    <div className="py-12 px-12">
-      <div className="grid md:grid-cols-4 grid-cols-2 gap-4">
+    <div className="md:py-12 py-6 md:px-12 px-6">
+      <div className="grid md:grid-cols-4 grid-cols-1 gap-4">
         {Array(8)
           .fill()
           .map((_, i) => (
