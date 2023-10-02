@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="py-6 flex justify-center items-center">
+    <div className="py-6 text-center flex justify-center items-center">
       <div className="text-sm text-gray-500">
         &copy; {new Date().getFullYear()} React Store. Assets from{" "}
         <Link

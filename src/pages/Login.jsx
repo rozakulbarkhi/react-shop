@@ -43,8 +43,8 @@ const Login = () => {
 
   return (
     <div className="min-h-screen border flex bg-slate-100 overflow-hidden">
-      <div className="flex-1 flex justify-center items-center w-full">
-        <div className="flex flex-col space-y-6 bg-white px-20 py-12 rounded-lg shadow-md">
+      <div className="flex-1 flex justify-center items-center w-full md:mx-0 mx-4">
+        <div className="flex flex-col space-y-6 bg-white md:px-20 px-8 md:py-12 py-6 rounded-lg shadow-md">
           <div className="tracking-wider">
             <h1 className="text-blue-800 font-bold text-3xl">Login</h1>
             <p className="font-medium text-sm">
@@ -102,7 +102,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <div className="flex-1 flex justify-center items-center">
+      <div className="flex-1 md:flex hidden justify-center items-center">
         <img
           src="https://images.unsplash.com/photo-1501127122-f385ca6ddd9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2832&q=80"
           alt="background login"

@@ -39,17 +39,17 @@ const DetailProduct = () => {
   if (!product) return <NotFound />;
 
   return (
-    <div className="flex mx-auto h-[50vh] w-[50vw] bg-white border border-slate-200 rounded-xl shadow-lg">
-      <div className="flex-1 flex justify-center items-center">
+    <div className="md:flex mx-auto md:h-[50vh] h-[65vh] md:w-[50vw] w-[90vw] bg-white border border-slate-200 rounded-xl shadow-lg md:my-0 mt-4">
+      <div className="flex-1 flex justify-center items-center md:my-0 my-4">
         <img
           src={product?.image}
           alt={product.title}
-          className="h-2/3 w-2/3 object-contain"
+          className="md:h-2/3 md:w-2/3 h-[140px] object-contain"
         />
       </div>
-      <div className="flex-1 flex flex-col justify-center px-16 space-y-8">
+      <div className="flex-1 flex flex-col justify-center md:px-16 px-6 md:space-y-8 space-y-4">
         <div>
-          <h1 className="font-bold">{product.title}</h1>
+          <h1 className="font-bold truncate">{product.title}</h1>
           <div className="flex items-center space-x-1">
             {Array(product.rating)
               .fill()
@@ -61,7 +61,7 @@ const DetailProduct = () => {
           </div>
         </div>
         <p className="text-xs tracking-wider">
-          {product?.description?.substring(0, 250)}...
+          {product?.description?.substring(0, 150)}...
         </p>
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">

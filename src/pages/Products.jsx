@@ -16,8 +16,8 @@ const Products = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="py-12 px-12">
-      <div className="grid md:grid-cols-4 grid-cols-2 gap-8">
+    <div className="md:py-12 py-6 md:px-12 px-6">
+      <div className="grid md:grid-cols-4 grid-cols-1 gap-8">
         {products?.map((product) => (
           <Card key={product.id} product={product} />
         ))}
