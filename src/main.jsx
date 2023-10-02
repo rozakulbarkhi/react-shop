@@ -1,13 +1,31 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Home, Login } from "./pages";
+import { Products, Login, DetailProduct, NotFound } from "./pages";
+import Layout from "./layouts/Layout";
+import { Provider } from "react-redux";
+import store from "./store";
+import { Toaster } from "react-hot-toast";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistStore } from "redux-persist";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: (
+      <Layout>
+        <Products />
+      </Layout>
+    ),
+  },
+  {
+    path: "/products/:id",
+    errorElement: <NotFound />,
+    element: (
+      <Layout>
+        <DetailProduct />
+      </Layout>
+    ),
   },
   {
     path: "/login",
@@ -15,8 +33,13 @@ const router = createBrowserRouter([
   },
 ]);
 
+const persistor = persistStore(store);
+
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <RouterProvider router={router} />
+      <Toaster />
+    </PersistGate>
+  </Provider>
 );
