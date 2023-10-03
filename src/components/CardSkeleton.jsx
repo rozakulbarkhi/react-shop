@@ -6,7 +6,7 @@ const CardSkeleton = () => {
           .fill()
           .map((_, i) => (
             <div
-              className="md:h-[320px] h-[240px] bg-white border border-gray-300 rounded-xl
+              className="md:h-[320px] h-[280px] bg-white border border-gray-300 rounded-xl
               shadow-md hover:brightness-50 transition-all duration-300 ease-in-out animate-pulse"
               key={i}
             >

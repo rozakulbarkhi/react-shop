@@ -5,7 +5,7 @@ const Card = ({ product }) => {
   return (
     <Link
       to={`/products/${product?.id}`}
-      className="md:h-[320px] h-[240px] border border-slate-200 rounded-xl shadow-md hover:brightness-50 transition-all duration-300 ease-in-out"
+      className="md:h-[320px] h-[280px] border border-slate-200 rounded-xl shadow-md hover:brightness-50 transition-all duration-300 ease-in-out"
     >
       <img
         src={product?.image}

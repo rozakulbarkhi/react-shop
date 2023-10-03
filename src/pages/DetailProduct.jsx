@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { getProduct } from "../store/actions/product";
 import { addToCart, totalPrice } from "../store/features/cart/cartSlice";
 import CardDetailSkeleton from "../components/CardDetailSkeleton";
+import toast from "react-hot-toast";
 
 const DetailProduct = () => {
   const { id } = useParams();
@@ -20,6 +21,12 @@ const DetailProduct = () => {
   const handleAddToCart = () => {
     dispatch(addToCart({ ...product, quantity }));
     dispatch(totalPrice());
+
+    toast.success("Product added to cart", {
+      style: {
+        fontSize: "12px",
+      },
+    });
   };
 
   const handleQuantity = (e) => {
@@ -39,17 +46,17 @@ const DetailProduct = () => {
   if (!product) return <NotFound />;
 
   return (
-    <div className="md:flex mx-auto md:h-[50vh] h-[65vh] md:w-[50vw] w-[90vw] bg-white border border-slate-200 rounded-xl shadow-lg md:my-0 mt-4">
-      <div className="flex-1 flex justify-center items-center md:my-0 my-4">
+    <div className="md:flex mx-auto md:h-[50vh] h-[75vh] md:w-[50vw] w-[90vw] bg-white border border-slate-200 rounded-xl shadow-lg md:my-0 mt-4">
+      <div className="md:w-full md:h-full h-[50%] flex flex-1 justify-center items-center">
         <img
           src={product?.image}
           alt={product.title}
-          className="md:h-2/3 md:w-2/3 h-[140px] object-contain"
+          className="w-3/4 h-3/4 object-contain"
         />
       </div>
-      <div className="flex-1 flex flex-col justify-center md:px-16 px-6 md:space-y-8 space-y-4">
+      <div className="md:w-full md:h-full h-[50%] flex flex-1 flex-col justify-center md:space-y-8 space-y-4 px-8">
         <div>
-          <h1 className="font-bold truncate">{product.title}</h1>
+          <h1 className="font-bold">{product.title.substring(0, 20)}...</h1>
           <div className="flex items-center space-x-1">
             {Array(product.rating)
               .fill()

@@ -1,5 +1,6 @@
 import propTypes from "prop-types";
 import { Navbar, Footer } from "../components";
+import withAuth from "../hooks/withAuth";
 
 const Layout = ({ children }) => {
   return (
@@ -15,4 +16,4 @@ Layout.propTypes = {
   children: propTypes.node.isRequired,
 };
 
-export default Layout;
+export default withAuth(Layout);

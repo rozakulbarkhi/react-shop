@@ -1,22 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { login } from "../store/actions/auth";
-import Cookies from "js-cookie";
 
 const Login = () => {
   const [data, setData] = useState({
     username: "",
     password: "",
   });
-  const token = Cookies.get("token");
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (token) {
-      navigate("/");
-    }
-  }, [token, navigate]);
 
   const { loading } = useSelector((state) => state.auth);
   const dispatch = useDispatch();

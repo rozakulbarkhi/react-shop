@@ -1,8 +1,10 @@
+import propTypes from "prop-types";
 import { BsFillTrashFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { removeCart } from "../store/features/cart/cartSlice";
+import toast from "react-hot-toast";
 
-const Cart = () => {
+const Cart = ({ onClose }) => {
   const { cart, totalPrice } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
@@ -10,8 +12,26 @@ const Cart = () => {
     return () => dispatch(removeCart(id));
   };
 
+  const handleCheckout = () => {
+    toast.error("Sorry, this feature is not available yet :(", {
+      style: {
+        fontSize: "12px",
+      },
+    });
+  };
+
+  const handleOnClose = (e) => {
+    if (e.target.id === "container") {
+      onClose();
+    }
+  };
+
   return (
-    <div className="absolute md:right-0 -right-20 my-1 text-slate-600 z-20">
+    <div
+      className="fixed inset-0 flex justify-center items-center z-50 bg-black backdrop-blur-sm bg-opacity-30 my-1 text-slate-600"
+      id="container"
+      onClick={handleOnClose}
+    >
       <div className="bg-white rounded-md shadow-lg flex flex-col md:w-[480px] w-[360px] justify-between items-center bg-red p-4">
         <h1 className="font-semibold tracking-wider text-lg underline mb-4">
           Shopping Cart
@@ -48,18 +68,30 @@ const Cart = () => {
             </div>
           )}
         </div>
-        <div className="my-2 flex justify-between w-full">
-          <div>Subtotal:</div>
-          <div className="font-semibold">${totalPrice.toFixed(2)}</div>
-        </div>
-        <div className="flex justify-center items-center w-full">
-          <button className="bg-blue-600 hover:bg-blue-700 w-full text-white px-2 py-1 rounded-md capitalize">
+        {totalPrice > 0 && (
+          <div className="my-2 flex justify-between w-full">
+            <div>Subtotal:</div>
+            <div className="font-semibold">${totalPrice.toFixed(2)}</div>
+          </div>
+        )}
+        <div
+          onClick={handleCheckout}
+          className="flex justify-center items-center w-full"
+        >
+          <button
+            disabled={cart.length === 0}
+            className="bg-blue-600 hover:bg-blue-700 w-full text-white px-2 py-1 rounded-md capitalize disabled:bg-slate-400 disabled:cursor-not-allowed"
+          >
             checkout
           </button>
         </div>
       </div>
     </div>
   );
+};
+
+Cart.propTypes = {
+  onClose: propTypes.func.isRequired,
 };
 
 export default Cart;

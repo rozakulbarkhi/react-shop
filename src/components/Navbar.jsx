@@ -1,32 +1,25 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import Cart from "./Cart";
-import Cookies from "js-cookie";
-import jwtDecode from "jwt-decode";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Profile from "./Profile";
+import { getUser } from "../store/features/auth/authSlice";
 
 const Navbar = () => {
-  const [user, setUser] = useState(null);
   const [openProfile, setOpenProfile] = useState(false);
   const [openCart, setOpenCart] = useState(false);
   const cartRef = useRef(null);
   const profileRef = useRef(null);
 
   const { cart } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.auth);
 
-  const token = Cookies.get("token");
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!token) {
-      navigate("/login");
-    } else {
-      const { user } = jwtDecode(token);
-      setUser(user);
-    }
-  }, [navigate, token]);
+    dispatch(getUser());
+  }, [dispatch]);
 
   useEffect(() => {
     const handleOutsideCart = (e) => {
@@ -78,7 +71,7 @@ const Navbar = () => {
             )}
           </div>
 
-          {openCart && <Cart />}
+          {openCart && <Cart onClose={() => setOpenCart((prev) => !prev)} />}
         </div>
         <div
           className="cursor-pointer relative"
