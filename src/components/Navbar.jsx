@@ -51,10 +51,18 @@ const Navbar = () => {
     setOpenCart((prev) => !prev);
   };
 
+  const handleClickLogo = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <nav className="sticky top-0 z-50 py-3 md:px-12 px-6 bg-blue-800 flex justify-between items-center text-white border-b-2 border-slate-200 shadow-lg">
       <div>
-        <Link to={"/"} className="text-xl font-bold uppercase tracking-widest">
+        <Link
+          onClick={handleClickLogo}
+          to={"/"}
+          className="text-xl font-bold uppercase tracking-widest"
+        >
           React Shop
         </Link>
       </div>
