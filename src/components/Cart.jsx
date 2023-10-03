@@ -9,7 +9,14 @@ const Cart = ({ onClose }) => {
   const dispatch = useDispatch();
 
   const handleRemoveCart = (id) => {
-    return () => dispatch(removeCart(id));
+    return () => {
+      dispatch(removeCart(id));
+      toast.error("Item removed from cart", {
+        style: {
+          fontSize: "12px",
+        },
+      });
+    };
   };
 
   const handleCheckout = () => {
