@@ -67,7 +67,7 @@ const DetailProduct = () => {
       </div>
       <div className="md:w-full md:h-full h-[50%] flex flex-1 flex-col justify-center md:space-y-8 space-y-4 px-8">
         <div>
-          <h1 className="font-bold">{product.title.substring(0, 20)}...</h1>
+          <h1 className="font-bold">{product?.title?.substring(0, 20)}...</h1>
           <div className="flex items-center space-x-1">
             {Array(product.rating)
               .fill()
