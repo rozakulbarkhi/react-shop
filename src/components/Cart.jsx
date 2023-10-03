@@ -35,7 +35,7 @@ const Cart = ({ onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 flex justify-center items-center z-50 bg-black backdrop-blur-sm bg-opacity-30 my-1 text-slate-600"
+      className="fixed inset-0 flex justify-center items-center z-50 bg-black backdrop-blur-sm bg-opacity-30 my-1 text-slate-600 px-1"
       id="container"
       onClick={handleOnClose}
     >
@@ -51,7 +51,7 @@ const Cart = ({ onClose }) => {
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-20 h-20 object-contain border p-2 rounded-md"
+                    className="w-20 h-20 object-contain border p-1 rounded-md"
                   />
                 </div>
                 <div className="flex-1 flex flex-col justify-between text-sm">
