@@ -1,16 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../store/actions/auth";
+import Spinner from "../components/Spinner";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const [data, setData] = useState({
-    username: "",
-    password: "",
+    username: "johnd",
+    password: "m38rmF$",
   });
+  const navigate = useNavigate();
 
   const { loading } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+
+  const token = Cookies.get("token");
+
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, [token, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -100,6 +111,8 @@ const Login = () => {
           className="h-screen w-full object-cover"
         />
       </div>
+
+      {loading && <Spinner />}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 import NotFound from "../components/NotFound";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,16 +7,27 @@ import { getProduct } from "../store/actions/product";
 import { addToCart, totalPrice } from "../store/features/cart/cartSlice";
 import CardDetailSkeleton from "../components/CardDetailSkeleton";
 import toast from "react-hot-toast";
+import Cookies from "js-cookie";
 
 const DetailProduct = () => {
   const { id } = useParams();
   const [quantity, setquantity] = useState(1);
+  const navigate = useNavigate();
+
   const { product, loading, error } = useSelector((state) => state.product);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getProduct(id));
   }, [dispatch, id]);
+
+  const token = Cookies.get("token");
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    }
+  }, [navigate, token]);
 
   const handleAddToCart = () => {
     dispatch(addToCart({ ...product, quantity }));

@@ -11,7 +11,7 @@ const NotFound = () => {
   }, [navigate]);
 
   return (
-    <div className="text-center">
+    <div className="text-center flex justify-center items-center min-h-screen">
       <div className="flex flex-col space-y-8">
         <div>
           <h1 className="text-7xl font-bold">404</h1>

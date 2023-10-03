@@ -12,6 +12,7 @@ import { persistStore } from "redux-persist";
 const router = createBrowserRouter([
   {
     path: "/",
+    errorElement: <NotFound />,
     element: (
       <Layout>
         <Products />
@@ -20,7 +21,6 @@ const router = createBrowserRouter([
   },
   {
     path: "/products/:id",
-    errorElement: <NotFound />,
     element: (
       <Layout>
         <DetailProduct />

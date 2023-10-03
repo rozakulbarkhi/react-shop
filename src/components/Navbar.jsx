@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import Cart from "./Cart";
 import { useDispatch, useSelector } from "react-redux";
-import Profile from "./Profile";
 import { getUser } from "../store/features/auth/authSlice";
+import Cart from "./Cart";
+import Profile from "./Profile";
 
 const Navbar = () => {
   const [openProfile, setOpenProfile] = useState(false);

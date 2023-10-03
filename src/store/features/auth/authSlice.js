@@ -17,6 +17,8 @@ const authSlice = createSlice({
   reducers: {
     getUser: (state) => {
       const token = Cookies.get("token");
+
+      if (!token) return;
       const { user } = jwtDecode(token);
       state.user = user;
     },
@@ -36,7 +38,7 @@ const authSlice = createSlice({
         state.token = action.payload.token;
 
         Cookies.set("token", action.payload.token, {
-          expires: 1,
+          expires: new Date(Date.now() + 10 * 60 * 1000),
         });
         window.location.href = "/";
       })
