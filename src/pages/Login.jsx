@@ -19,7 +19,7 @@ const Login = () => {
 
   useEffect(() => {
     if (token) {
-      navigate("/");
+      navigate("/products");
     }
   }, [token, navigate]);
 
@@ -88,7 +88,7 @@ const Login = () => {
                 disabled={data.username === "" || data.password === ""}
                 className="bg-blue-800 hover:bg-blue-900 px-2 py-1 capitalize rounded-md w-full text-white my-1 disabled:bg-slate-400 disabled:cursor-not-allowed"
               >
-                {loading ? "Loading..." : "Login"}
+                login
               </button>
             </div>
           </form>

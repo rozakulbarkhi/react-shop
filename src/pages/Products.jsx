@@ -19,7 +19,7 @@ const Products = () => {
 
   useEffect(() => {
     if (!token) {
-      navigate("/login");
+      navigate("/");
     }
   }, [navigate, token]);
 
